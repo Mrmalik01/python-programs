@@ -4,13 +4,13 @@ import os
 import json
 import threading
 from queue import Queue
+import time
 
 dotenv.load_dotenv()
 
 TARGET = os.environ.get("PORT_SCANNER_IP")
-PORT = 80
 FROM_PORT = 1
-TO_PORT = 5000
+TO_PORT = 10000
 
 queue = Queue()
 result = {
@@ -41,6 +41,8 @@ def worker():
 
 def save_result():
     global result
+    result['opened'] = sorted(result['opened'])
+    result['closed'] = sorted(result['closed'])
     with open("result.json", "w") as f:
         f.write(json.dumps(result))
         f.close()
@@ -50,11 +52,13 @@ def main():
 
     # Making a list of threads
     thread_list = []
-    for t in range(10):
+    for t in range(50):
         thread = threading.Thread(target=worker)
         thread_list.append(thread)
 
+
     print(f"Checking ports in the range - ({FROM_PORT, TO_PORT}) - on the machine {TARGET}")
+    start_time = time.time()
     # Start all the threads
     for thread in thread_list:
         thread.start()
@@ -62,9 +66,9 @@ def main():
     # Wait for all the threads to finish before saving the result to the file
     for thread in thread_list:
         thread.join()
-
+    end_time = time.time()
     save_result()
-    print("Result is saved to a file")
+    print(f"Result is saved to a file. The script took {round((end_time-start_time), 5)} secs")
 
 
 if __name__ == "__main__":

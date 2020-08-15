@@ -10,7 +10,7 @@ dotenv.load_dotenv()
 TARGET = os.environ.get("PORT_SCANNER_IP")
 PORT = 80
 FROM_PORT = 1
-TO_PORT = 1024
+TO_PORT = 5000
 
 queue = Queue()
 result = {

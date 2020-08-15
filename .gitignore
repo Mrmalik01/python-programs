@@ -1,5 +1,8 @@
-# Env Files
+# ENV FILES
 .env
 *.env
 Networking/.env
 env
+
+# INTELLIJ FILES
+.idea

@@ -8,7 +8,7 @@ dotenv.load_dotenv()
 ########################################################################
 # Port no represents a service -
 # DDOS attack on a particular port means bringing that service down
-# 25 - SSH | 80 - HTTP
+# 25 - SMTP | 80 - HTTP
 ########################################################################
 
 target = os.environ.get("DDOS_TARGET_IP")

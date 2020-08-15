@@ -27,7 +27,7 @@ server.login(EMAIL, PASSWORD)
 msg  = MIMEMultipart()
 
 msg['From'] = "Chic-Chic"
-msg['To'] = "khizarmalik.ai@gmail.com"
+msg['To'] = TO
 msg['Subject'] = "Chic-Chic Launched"
 
 with open("message.txt", "r") as f:
